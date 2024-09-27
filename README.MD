@@ -1,8 +1,8 @@
-### Sistema de noticias y blog
-
 # Este es un proyecto de un ramo 📝
 
-# Integrantes
+## Integrantes
 
 - Diego Sanhueza
 - Felipe Carcamo 
+
+- caca
