@@ -5,5 +5,5 @@ Se implementara un blog de un tema en especifico 🖥️ 🖱️
 ## Integrantes
 
 - Diego Sanhueza
-- Felipe Carcamo [https://github.com/FeLipe-133]
+- (Felipe Carcamo)[https://github.com/FeLipe-133]
 
