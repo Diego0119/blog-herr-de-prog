@@ -1,0 +1,11 @@
+:root {
+    --color-primary: #12555a;
+    --color-secondary: #eca351;
+    --color-accent: #efcf6b;
+    --color-background: #f4eb9c;
+    --color-text: #122519;
+}
+
+.bg-custom {
+    background: var(--color-primary);
+}
