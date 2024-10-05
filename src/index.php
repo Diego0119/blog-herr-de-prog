@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg bg-custom">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Games blog</a>
@@ -37,38 +36,26 @@
         </div>
     </nav>
 
-
     <div class="container text-center mt-4">
         <div class="row g-3">
             <div class="col-10">
-                <div class="border p-4 rounded mb-4 shadow-sm post-card">
-                    <img src="https://placehold.co/600x400" class="rounded mb-3 img-fluid" alt="Post Image">
-                    <p class="fs-4 fw-bold post-title">Título del Post</p>
-                    <p class="text-justify post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-                        iusto
-                        maiores cumque aspernatur incidunt ex nam quo recusandae, possimus autem, aperiam quisquam sint
-                        quod
-                        dolorum esse tenetur ab rem vero.</p>
-                </div>
-                <div class="border p-4 rounded mb-4 shadow-sm post-card">
-                    <img src="https://placehold.co/600x400" class="rounded mb-3 img-fluid" alt="Post Image">
-                    <p class="fs-4 fw-bold post-title">Título del Post</p>
-                    <p class="text-justify post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-                        iusto
-                        maiores cumque aspernatur incidunt ex nam quo recusandae, possimus autem, aperiam quisquam sint
-                        quod
-                        dolorum esse tenetur ab rem vero.</p>
-                </div>
-                <div class="border p-4 rounded mb-4 shadow-sm post-card">
-                    <img src="https://placehold.co/600x400" class="rounded mb-3 img-fluid" alt="Post Image">
-                    <p class="fs-4 fw-bold post-title">Título del Post</p>
-                    <p class="text-justify post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-                        iusto
-                        maiores cumque aspernatur incidunt ex nam quo recusandae, possimus autem, aperiam quisquam sint
-                        quod
-                        dolorum esse tenetur ab rem vero.</p>
-                </div>
+                <?php
+                include('./functions/funcionts.php');
+                $posts_file = '../posts.txt';
+                if (file_exists($posts_file)) {
+                    $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                    foreach ($posts as $post) {
+                        list($title, $description, $image) = explode("|", $post);
+                        echo "<div class='border p-4 rounded mb-4 shadow-sm post-card'>";
+                        echo "<img src=$image class='rounded mb-3 img-fluid' alt='Post Image'>";
+                        echo "<p class='fs-4 fw-bold post-title'>$title</p>";
+                        echo "  <p class='text-justify post-content'>$description</p>";
+                        echo "</div>";
+                    }
+                }
+                ?>
             </div>
+
             <div class="col-2 sidebar-creadores">
                 <div class="border  p-4 rounded">
                     <h5 class="fw-bold">Post Recientes</h5>

@@ -1,0 +1,6 @@
+Post 1|Esta es la descripción del post desde un txt|https://placehold.co/600x400
+Post 2|Esta es la descripción del post desde un txt|https://placehold.co/600x400
+Post 3|Esta es la descripción del post desde un txt|https://placehold.co/600x400
+Post 4|Esta es la descripción del post desde un txt|https://placehold.co/600x400
+Post 5|Esta es la descripción del post desde un txt|https://placehold.co/600x400
+Post 6|Esta es la descripción del post desde un txt|https://placehold.co/600x400
