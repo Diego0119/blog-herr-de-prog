@@ -1,6 +1,5 @@
 <?php include('../../header.php'); ?>
 
-
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Games blog</a>
@@ -45,7 +44,7 @@
 
         <?php
 
-        include('functions.php');
+        include('../../functions/functions.php');
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
