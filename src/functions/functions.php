@@ -12,14 +12,25 @@ function LeerArchivo()
 function SubirArchivo($titulo, $descripcion, $imagen_url)
 {
     $database = '../../posts.txt';
-    $nuevo_post = $titulo . "|" . $descripcion . "|" . $imagen_url;
+    $count = 0;
+    $id = $count + 1;
+    $nuevo_post = $id . "|" . $titulo . "|" . $descripcion . "|" . $imagen_url;
     file_put_contents($database, $nuevo_post . PHP_EOL, FILE_APPEND | LOCK_EX);
 }
 
-function EliminarPost()
+function EliminarPost($id_post)
 {
-    // $database = '../../posts.txt';
-    // $post_a_eliminar =
+    $database = '../../posts.txt';
+    $posts = file($database, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $posts_filtrados = [];
+    foreach ($posts as $post) {
+        list($id, $title, $description, $image) = explode("|", $post);
+        if ($id != $id_post) {
+            $posts_filtrados = $post;
+        }
+
+    }
+    file_put_contents($database, implode(PHP_EOL, $posts_filtrados) . PHP_EOL);
 
 }
 

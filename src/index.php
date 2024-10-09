@@ -24,7 +24,7 @@
                 if (file_exists($posts_file)) {
                     $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                     foreach ($posts as $post) {
-                        list($title, $description, $image) = explode("|", $post);
+                        list($id, $title, $description, $image) = explode("|", $post);
                         echo "<div class='border p-4 rounded mb-4 shadow-sm post-card'>";
                         echo "<img src=$image class='rounded mb-3 img-fluid' alt='Post Image'>";
                         echo "<p class='fs-4 fw-bold post-title'>$title</p>";
