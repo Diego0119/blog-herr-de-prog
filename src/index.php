@@ -25,7 +25,7 @@
                     $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                     foreach ($posts as $post) {
                         list($id, $title, $description, $image) = explode("|", $post);
-                        echo "<a href='public/views/post.php?post_id=$id'>";
+                        echo "<a href='public/views/post.php?post_id=$id' class='text-decoration-none text-black'>";
                         echo "<div class='border p-4 rounded mb-4 shadow-sm post-card'>";
                         echo "<img src=$image class='rounded mb-3 img-fluid' alt='Post Image'>";
                         echo "<p class='fs-4 fw-bold post-title'>$title</p>";
@@ -38,12 +38,17 @@
             </div>
 
             <div class="col-2 sidebar-creadores">
-                <div class="border  p-4 rounded">
-                    <h5 class="fw-bold">Post Recientes</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-dark">Post 1</a></li>
-                        <li><a href="#" class="text-decoration-none text-dark">Post 2</a></li>
-                        <li><a href="#" class="text-decoration-none text-dark">Post 3</a></li>
+                <div class='border  p-4 rounded'>
+                    <h5 class='fw-bold'>Post Recientes</h5>
+                    <ul class='list-unstyled'>
+                        <?php
+                        $posts_file = '../posts.txt';
+                        $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                        foreach ($posts as $post) {
+                            list($id, $title) = explode("|", $post);
+                            echo "<li><a href='public/views/post.php?post_id=$id' class='text-decoration-none text-dark'>$title</a></li>";
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
