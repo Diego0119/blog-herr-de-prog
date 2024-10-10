@@ -22,7 +22,8 @@ function SubirArchivo($titulo, $autor, $descripcion, $imagen_url)
     }
     $id = $count + 1;
     $nuevo_post = $id . "|" . $titulo . "|" . $autor . "|" . $descripcion . "|" . $imagen_url;
-    if (file_put_contents($database, $nuevo_post . PHP_EOL, FILE_APPEND | LOCK_EX) === false) {
+    // una vez armado el archivo 
+    if (file_put_contents($database, $nuevo_post . PHP_EOL, FILE_APPEND | LOCK_EX) == false) {
         echo "Error al escribir en el archivo.";
     }
 }
@@ -43,3 +44,9 @@ function EliminarPost($id_post)
 
 }
 
+// esta funcion debe mover el archivo dado a la carpeta upload
+function MoverArchivo()
+{
+
+
+}

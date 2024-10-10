@@ -1,0 +1,1 @@
+1|nombre usuario|comentario|id_usuario|fecha

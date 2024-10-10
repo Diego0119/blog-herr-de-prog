@@ -22,8 +22,9 @@
     <div class="container mt-5">
         <h1>Subir un Nuevo Post</h1>
 
-        <form method="POST">
+        <form method="POST" action="subir.php" enctype="multipart/form-data">
             <div class="form-group">
+
                 <label for="titulo">Título del Post</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" required>
             </div>
@@ -40,25 +41,33 @@
 
             <div class="form-group mb-2">
                 <label for="imagen_url">URL de la Imagen</label>
-                <input type="text" class="form-control" id="imagen_url" name="imagen_url"
+                <input type="file" class="form-control" id="imagen_url" name="imagen_url"
                     placeholder="https://placehold.co/600x400" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Subir Post</button>
+            <button type="submit" name="submit" id="submit" class="btn btn-primary">Subir Post</button>
         </form>
 
         <?php
 
         include('../../functions/functions.php');
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['submit'])) {
 
             // estos identificadores "titulo,autor....etc", provienen del html, de name="titulo" por ejemplo
             $titulo = $_POST['titulo'];
             $autor = $_POST['autor'];
             $descripcion = $_POST['descripcion'];
             $imagen_url = $_POST['imagen_url'];
+            echo $titulo;
+            echo $autor;
+            echo $descripcion;
+            echo $imagen_url;
 
+            // llamar a la funcion una vez recibidos todos los campos
+            // primero se debe buscar el archivo (txt)
+            // armar la variable para escribir en el archivo (lo hace la funcion)
+            // hay un campo FILE que tiene tmp_name, tmp_size, el nombre que se genera estara en el txt (la ruta)
             SubirArchivo($titulo, $autor, $descripcion, $imagen_url);
 
             echo "<div class='alert alert-success mt-4'>El post ha sido subido correctamente.</div>";

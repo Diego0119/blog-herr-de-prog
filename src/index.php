@@ -34,7 +34,6 @@
                         echo "<p class=''>Autor: $autor</p>";
                         echo "</a>";
                         echo "</div>";
-
                     }
                 }
                 ?>
@@ -59,6 +58,5 @@
     </div>
 </body>
 <?php include('./footer.php'); ?>
-
 
 </html>
