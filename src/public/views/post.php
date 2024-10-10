@@ -35,17 +35,21 @@
                             if ($post_data[0] == $post_id) {
                                 $found = true;
                                 $title = $post_data[1];
-                                $content = $post_data[2];
-                                $image_url = $post_data[3];
+                                $autor = $post_data[2];
+                                $content = $post_data[3];
+                                $image_url = $post_data[4];
                                 ?>
 
                                 <div class="post-detail border rounded p-4 shadow-sm mb-4">
-                                    <h1 class="fw-bold text-center"><?php echo htmlspecialchars($title); ?></h1>
+                                    <h1 class="fw-bold text-center mb-4"><?php echo htmlspecialchars($title); ?></h1>
                                     <img src="<?php echo htmlspecialchars($image_url); ?>" alt="Imagen del post"
-                                        class="img-fluid rounded mx-auto d-block mb-3">
+                                        class="img-fluid rounded mx-auto d-block mb-3" width="800">
                                     <div class="content">
                                         <p class="text-justify"><?php echo nl2br(htmlspecialchars($content)); ?></p>
                                     </div>
+                                </div>
+                                <div class="related-posts border rounded p-4 shadow-sm mt-4">
+                                    <p>Posts relacionados</p>
                                 </div>
 
                                 <?php

@@ -29,11 +29,16 @@
             </div>
 
             <div class="form-group">
+                <label for="autor">Autor</label>
+                <input type="text" class="form-control" id="autor" name="autor" required>
+            </div>
+
+            <div class="form-group">
                 <label for="descripcion">Descripción del Post</label>
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-2">
                 <label for="imagen_url">URL de la Imagen</label>
                 <input type="text" class="form-control" id="imagen_url" name="imagen_url"
                     placeholder="https://placehold.co/600x400" required>
@@ -48,11 +53,13 @@
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+            // estos identificadores "titulo,autor....etc", provienen del html, de name="titulo" por ejemplo
             $titulo = $_POST['titulo'];
+            $autor = $_POST['autor'];
             $descripcion = $_POST['descripcion'];
             $imagen_url = $_POST['imagen_url'];
 
-            SubirArchivo($titulo, $descripcion, $imagen_url);
+            SubirArchivo($titulo, $autor, $descripcion, $imagen_url);
 
             echo "<div class='alert alert-success mt-4'>El post ha sido subido correctamente.</div>";
         }

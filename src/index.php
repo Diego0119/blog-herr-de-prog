@@ -24,14 +24,17 @@
                 if (file_exists($posts_file)) {
                     $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                     foreach ($posts as $post) {
-                        list($id, $title, $description, $image) = explode("|", $post);
-                        echo "<a href='public/views/post.php?post_id=$id' class='text-decoration-none text-black'>";
+                        list($id, $title, $autor, $description, $image) = explode("|", $post);
+                        $new_description = substr($description, 0, 320);
                         echo "<div class='border p-4 rounded mb-4 shadow-sm post-card'>";
-                        echo "<img src=$image class='rounded mb-3 img-fluid' alt='Post Image'>";
+                        echo "<a href='public/views/post.php?post_id=$id' class='text-decoration-none text-black'>";
+                        echo "<img src=$image class='rounded mb-3 img-fluid' width='850' alt='Post Image'>";
                         echo "<p class='fs-4 fw-bold post-title'>$title</p>";
-                        echo "  <p class='text-justify post-content'>$description</p>";
-                        echo "</div>";
+                        echo "<p class='text-justify post-content'>$new_description.....</p>";
+                        echo "<p class=''>Autor: $autor</p>";
                         echo "</a>";
+                        echo "</div>";
+
                     }
                 }
                 ?>
