@@ -45,28 +45,29 @@
                                 ?>
 
                                     <div class='border p-2 text-center rounded shadow-sm post-card'>
-                                        <h1 class="fw-bold text-center my-2"><?php echo htmlspecialchars($title); ?></h1>
+                                        <h1 class="fw-bolder fs-1 text-center my-2"><?php echo htmlspecialchars($title); ?></h1>
                                     </div>
                                     <div class='border p-2 my-2 rounded shadow-sm post-card'>
                                         <img src="<?php echo htmlspecialchars($image_url); ?>" alt="Imagen del post"
                                             class="img-fluid rounded mx-auto d-block" width="800">
                                     </div>
                                     <div class='border p-2 rounded shadow-sm post-card'>
-                                        <p class="text-justify"><?php echo nl2br(htmlspecialchars($content)); ?></p>
+                                        <p class="text-justify fs-6"><?php echo nl2br(htmlspecialchars($content)); ?></p>
                                     </div>
                                     <div class='border p-2 rounded shadow-sm post-card'>
                                         
                                     <?php
                                         $comentarios_file = '../../../comentarios.txt';
-                                        echo "<h1 class='fw-bold my-4'> Comentarios </h1>";
+                                        echo "<h1 class='fw-bolder fs-2 my-4'> Comentarios </h1>";
                                             if (file_exists($comentarios_file)) {
                                                 $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                                                 foreach ($comentarios as $comentario) {
-                                                    list( $comentario_id_tema, $comentario_id_usuario, $comentario_texto, $fecha, $id_comentario) = explode("|", $comentario);
+                                                    list( $comentario_id_tema, $comentario_id_usuario, $comentario_username, $comentario_texto, $fecha, $id_comentario) = explode("|", $comentario);
                                                     $hay_post=false;
                                                     if ($comentario_id_tema == $post_id) {
-                                                        echo "<div class='border p-2 rounded shadow-sm post-card'>";
-                                                        echo "<p class='text-justify'>" . $comentario_texto . "</p>";
+                                                        echo "<div class='border border-5 p-2 rounded shadow-sm post-card bg-fondo'>";
+                                                        echo "<p class='text-start fs-5 fw-bold'>" . $comentario_username . "</p>"; 
+                                                        echo "<p class='text-start fs-6'>" . $comentario_texto . "</p>";
                                                         echo "</div>";
                                                         $hay_post=true;
                                                     }
@@ -76,8 +77,9 @@
                                                 echo "<p>No hay comentarios disponibles.</p>";
                                             }
 
-                                    ?>
-
+                                    ?>    
+                                    <div class='border my-2 p-2 rounded shadow-sm post-card'>
+                                        <p class='text-start fs-5 fw-bold'>Agregar un comentario</p>
                                     </div>
                                 </div>
 
