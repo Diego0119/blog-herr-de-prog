@@ -1,1 +1,2 @@
-1|nombre usuario|comentario|id_usuario|fecha
+0|id_usuario|comentario|fecha|id_comentario
+1|1|este es un comentario|11/10|1
