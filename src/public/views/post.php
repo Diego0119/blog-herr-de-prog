@@ -103,7 +103,7 @@ if (isset($_POST['submit_comentario'])) {
                                                 <label for="comentario">Comentario</label>
                                                 <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
                                             </div>
-                                        <button type="submit" class="btn btn-primary mt-2">Agregar Comentario</button>
+                                        <button type="submit" class="btn custom-btn mt-2">Agregar Comentario</button>
                                         <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
                                         </form>
                                     </div>
