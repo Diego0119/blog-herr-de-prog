@@ -1,4 +1,6 @@
-<?php include('../../header.php'); ?>
+<?php include('../../header.php');
+session_start();
+?>
 
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
@@ -52,7 +54,10 @@
 
         include('../../functions/functions.php');
 
-        if (isset($_POST['submit'])) {
+        if (!isset($_SESSION['user_id'])) {
+            echo "<div class='alert alert-danger mt-4'>Se debe iniciar sesión para subir un post</div>";
+
+        } else if (isset($_POST['submit'])) {
 
             // estos identificadores "titulo,autor....etc", provienen del html, de name="titulo" por ejemplo
             $titulo = $_POST['titulo'];

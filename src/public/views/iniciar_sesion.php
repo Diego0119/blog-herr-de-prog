@@ -15,6 +15,7 @@ if (isset($_POST['submit'])) {
             $encontrado = true;
             $_SESSION['nickname'] = $nickname;
             $_SESSION['password'] = $password;
+            $_SESSION['user_id'] = uniqid();
             header('Location: ../../index.php');
             exit();
         } else {
@@ -67,7 +68,8 @@ if (isset($_POST['submit'])) {
                             <?php echo $error; ?>
                         </div>
                     <?php } ?>
-                    <button type="submit" name="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-block mt-2">Iniciar sesión</button>
+                    <p class="text-gray mt-2">¿No tienes cuenta? Registrate <a href="./registrarse.php">aca</a></p>
                 </form>
             </div>
         </div>
