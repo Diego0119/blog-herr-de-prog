@@ -30,8 +30,8 @@
             </div>
 
             <div class="form-group">
-                <label for="autor">Autor</label>
-                <input type="text" class="form-control" id="autor" name="autor" required>
+                <label for="categoria">Categoria</label>
+                <input type="text" class="form-control" id="categoria" name="categoria" required>
             </div>
 
             <div class="form-group">
@@ -56,13 +56,9 @@
 
             // estos identificadores "titulo,autor....etc", provienen del html, de name="titulo" por ejemplo
             $titulo = $_POST['titulo'];
-            $autor = $_POST['autor'];
+            $categoria = $_POST['categoria'];
             $descripcion = $_POST['descripcion'];
             $imagen_url = $_POST['imagen_url'];
-            echo $titulo;
-            echo $autor;
-            echo $descripcion;
-            echo $imagen_url;
 
             // llamar a la funcion una vez recibidos todos los campos
             // primero se debe buscar el archivo (txt)

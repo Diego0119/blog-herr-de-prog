@@ -1,4 +1,6 @@
-<?php include('../../header.php'); ?>
+<?php include('../../header.php');
+session_start();
+?>
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="../../index.php">Games blog</a>

@@ -1,1 +1,1 @@
-1|nombre usuario|comentario|id_usuario|fecha
+1|id_usuario|comentario||fecha|id_post

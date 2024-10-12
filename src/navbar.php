@@ -13,6 +13,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./public/views/subir.php">Upload Post</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./public/views/iniciar_sesion.php">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./public/views/registrarse.php">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./public/views/cerrar_sesion.php">Cerrar Sesión</a>
+                </li>
             </ul>
         </div>
     </div>
