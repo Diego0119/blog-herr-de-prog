@@ -50,3 +50,12 @@ function MoverArchivo()
 
 
 }
+
+function agregarComentario($post_id, $usuario, $comentario_texto) {
+    $comentario_file = '../../../comentarios.txt';
+    $id_comentario = uniqid(); 
+    $fecha = date('Y-m-d H:i:s'); 
+    $comentario_data = "$post_id|$usuario|$comentario_texto|$fecha|$id_comentario\n";
+    
+    file_put_contents($comentario_file, $comentario_data, FILE_APPEND | LOCK_EX);
+}

@@ -1,4 +1,22 @@
-<?php include('../../header.php'); ?>
+<?php include('../../header.php');
+include('../../functions/functions.php'); 
+
+session_start(); 
+
+if (isset($_POST['submit_comentario'])) {
+
+    $post_id = $_POST['post_id'];
+    $comentario_texto = htmlspecialchars($_POST['comentario']);
+    $usuario = isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : 'Anonimo'; //puede ser anonimo el comentario :P
+
+    AgregarComentario($post_id, $usuario, $comentario_texto);
+
+    echo "<div class='alert alert-success mt-4'>Comentario agregado correctamente.</div>";
+
+    header("Location: ".$_SERVER['REQUEST_URI']);
+    exit;
+}
+?>
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="../../index.php">Games blog</a>
@@ -80,7 +98,16 @@
                                     ?>    
                                     <div class='border my-2 p-2 rounded shadow-sm post-card'>
                                         <p class='text-start fs-5 fw-bold'>Agregar un comentario</p>
+                                        <form action="" method="post">
+                                            <div class="form-group">
+                                                <label for="comentario">Comentario</label>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
+                                            </div>
+                                        <button type="submit" class="btn btn-primary mt-2">Agregar Comentario</button>
+                                        <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
+                                        </form>
                                     </div>
+                                    
                                 </div>
 
                                 <?php
