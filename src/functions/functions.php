@@ -9,7 +9,7 @@ function LeerArchivo()
 }
 
 
-function SubirArchivo($titulo, $autor, $descripcion, $imagen_url)
+function SubirArchivo($titulo, $user_id, $descripcion, $imagen_url)
 {
 
     $database = '../../posts.txt';
@@ -21,7 +21,7 @@ function SubirArchivo($titulo, $autor, $descripcion, $imagen_url)
         $count = 0;
     }
     $id = $count + 1;
-    $nuevo_post = $id . "|" . $titulo . "|" . $autor . "|" . $descripcion . "|" . $imagen_url;
+    $nuevo_post = $id . "|" . $titulo . "|" . $user_id . "|" . $descripcion . "|" . $imagen_url;
     // una vez armado el archivo 
     if (file_put_contents($database, $nuevo_post . PHP_EOL, FILE_APPEND | LOCK_EX) == false) {
         echo "Error al escribir en el archivo.";
@@ -48,5 +48,15 @@ function EliminarPost($id_post)
 function MoverArchivo()
 {
 
+
+}
+
+function RegistrarUsuario()
+{
+
+}
+
+function IniciarSesion()
+{
 
 }

@@ -4,8 +4,9 @@ session_start();
 if (isset($_POST['submit'])) {
     $usuarios_file = '../../../usuarios.txt';
 
-    $username = $_POST['username'];
     $username_id = uniqid();
+    $_SESSION['user_id'] = $username_id;
+    $username = $_POST['username'];
     $nickname = $_POST['nickname'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
@@ -28,7 +29,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (!isset($error)) {
-        file_put_contents($usuarios_file, "$username|$password\n", FILE_APPEND);
+        file_put_contents($usuarios_file, "$username_id|$username|$nickname|$password\n", FILE_APPEND);
         $_SESSION['username'] = $username;
         header('Location: ../../index.php');
         exit();

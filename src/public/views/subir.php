@@ -60,6 +60,7 @@ session_start();
         } else if (isset($_POST['submit'])) {
 
             // estos identificadores "titulo,autor....etc", provienen del html, de name="titulo" por ejemplo
+            $user_id = $_SESSION['user_id'];
             $titulo = $_POST['titulo'];
             $categoria = $_POST['categoria'];
             $descripcion = $_POST['descripcion'];
@@ -69,7 +70,7 @@ session_start();
             // primero se debe buscar el archivo (txt)
             // armar la variable para escribir en el archivo (lo hace la funcion)
             // hay un campo FILE que tiene tmp_name, tmp_size, el nombre que se genera estara en el txt (la ruta)
-            SubirArchivo($titulo, $autor, $descripcion, $imagen_url);
+            SubirArchivo($titulo, $user_id, $descripcion, $imagen_url);
 
             echo "<div class='alert alert-success mt-4'>El post ha sido subido correctamente.</div>";
         }
