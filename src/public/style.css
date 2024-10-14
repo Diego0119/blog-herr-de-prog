@@ -10,6 +10,11 @@
     background: var(--color-primary);
 }
 
+.bg-fondo {
+    background: var(--color-primary);
+    color: white;
+}
+
 .custom-btn {
     background-color: white; /*color de fondo*/
     border: 2px solid var(--color-primary); /*borde*/

@@ -1,5 +1,21 @@
 <?php include('../../header.php');
+include('../../functions/functions.php');
+
 session_start();
+
+if (isset($_POST['submit_comentario'])) {
+
+    $post_id = $_POST['post_id'];
+    $comentario_texto = htmlspecialchars($_POST['comentario']);
+    $usuario = isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : 'Anonimo'; //puede ser anonimo el comentario :P
+
+    AgregarComentario($post_id, $usuario, $comentario_texto);
+
+    echo "<div class='alert alert-success mt-4'>Comentario agregado correctamente.</div>";
+
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit;
+}
 ?>
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
@@ -46,22 +62,60 @@ session_start();
                                 $image_url = $post_data[4];
                                 ?>
 
-                                    <div class='border p-2 text-center rounded shadow-sm post-card'>
-                                    <h1 class="fw-bold text-center mb-4"><?php echo htmlspecialchars($title); ?></h1>
-                                    </div>
-                                    <div class='border p-2 my-2 rounded shadow-sm post-card'>
+                                <div class='border p-2 text-center rounded shadow-sm post-card'>
+                                    <h1 class="fw-bolder fs-1 text-center my-2"><?php echo htmlspecialchars($title); ?></h1>
+                                </div>
+                                <div class='border p-2 my-2 rounded shadow-sm post-card'>
                                     <img src="<?php echo htmlspecialchars($image_url); ?>" alt="Imagen del post"
-                                        class="img-fluid rounded mx-auto d-block mb-3" width="800">
+                                        class="img-fluid rounded mx-auto d-block" width="800">
+                                </div>
+                                <div class='border p-2 rounded shadow-sm post-card'>
+                                    <p class="text-justify fs-6"><?php echo nl2br(htmlspecialchars($content)); ?></p>
+                                </div>
+                                <div class='border p-2 rounded shadow-sm post-card'>
+
+                                    <?php
+                                    $comentarios_file = '../../../comentarios.txt';
+                                    echo "<h1 class='fw-bolder fs-2 my-4'> Comentarios </h1>";
+                                    if (file_exists($comentarios_file)) {
+                                        $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                        foreach ($comentarios as $comentario) {
+                                            list($comentario_id_tema, $comentario_id_usuario, $comentario_username, $comentario_texto, $fecha, $id_comentario) = explode("|", $comentario);
+                                            $hay_post = false;
+                                            if ($comentario_id_tema == $post_id) {
+                                                echo "<div class='border border-5 p-2 rounded shadow-sm post-card bg-fondo'>";
+                                                echo "<p class='text-start fs-5 fw-bold'>" . $comentario_username . "</p>";
+                                                echo "<p class='text-start fs-6'>" . $comentario_texto . "</p>";
+                                                echo "</div>";
+                                                $hay_post = true;
+                                            }
+                                        }
+                                    }
+                                    if (!$hay_post) {
+                                        echo "<p>No hay comentarios disponibles.</p>";
+                                    }
+
+                                    ?>
+                                    <div class='border my-2 p-2 rounded shadow-sm post-card'>
+                                        <p class='text-start fs-5 fw-bold'>Agregar un comentario</p>
+                                        <form action="" method="post">
+                                            <div class="form-group">
+                                                <label for="comentario">Comentario</label>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="3"
+                                                    required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn custom-btn mt-2">Agregar Comentario</button>
+                                            <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
+                                        </form>
                                     </div>
-                                    <div class='border p-2 rounded shadow-sm post-card'>
-                                        <p class="text-justify"><?php echo nl2br(htmlspecialchars($content)); ?></p>
-                                    </div>
+
                                 </div>
 
                                 <?php
                                 break;
                             }
                         }
+
 
                         if (!$found) {
                             echo "<p class='text-danger'>El post no existe.</p>";
