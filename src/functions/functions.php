@@ -12,7 +12,7 @@ function LeerArchivo()
 function SubirArchivo($titulo, $autor, $descripcion, $imagen_url)
 {
 
-    $database = '../../posts.txt';
+    $database = '../../../posts.txt';
 
     if (file_exists($database)) {
         $posts = file($database, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -54,8 +54,7 @@ function MoverArchivo()
 function agregarComentario($post_id, $usuario, $comentario_texto) {
     $comentario_file = '../../../comentarios.txt';
     $id_comentario = uniqid(); 
-    $fecha = date('Y-m-d H:i:s'); 
-    $comentario_data = "$post_id|$usuario|$comentario_texto|$fecha|$id_comentario\n";
+    $comentario_data = "$post_id|$usuario|$comentario_texto|$id_comentario\n";
     
     file_put_contents($comentario_file, $comentario_data, FILE_APPEND | LOCK_EX);
 }

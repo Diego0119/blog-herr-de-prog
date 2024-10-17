@@ -4,7 +4,6 @@ include('../../functions/functions.php');
 session_start();
 
 if (isset($_POST['submit_comentario'])) {
-
     $post_id = $_POST['post_id'];
     $comentario_texto = htmlspecialchars($_POST['comentario']);
     $usuario = isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : 'Anonimo'; //puede ser anonimo el comentario :P
@@ -80,7 +79,7 @@ if (isset($_POST['submit_comentario'])) {
                                     if (file_exists($comentarios_file)) {
                                         $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                                         foreach ($comentarios as $comentario) {
-                                            list($comentario_id_tema, $comentario_id_usuario, $comentario_username, $comentario_texto, $fecha, $id_comentario) = explode("|", $comentario);
+                                            list($comentario_id_tema, $comentario_id_usuario, $comentario_username, $comentario_texto, $id_comentario) = explode("|", $comentario);
                                             $hay_post = false;
                                             if ($comentario_id_tema == $post_id) {
                                                 echo "<div class='border border-5 p-2 rounded shadow-sm post-card bg-fondo'>";
@@ -101,8 +100,7 @@ if (isset($_POST['submit_comentario'])) {
                                         <form action="" method="post">
                                             <div class="form-group">
                                                 <label for="comentario">Comentario</label>
-                                                <textarea class="form-control" id="comentario" name="comentario" rows="3"
-                                                    required></textarea>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
                                             </div>
                                             <button type="submit" class="btn custom-btn mt-2">Agregar Comentario</button>
                                             <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
