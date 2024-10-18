@@ -19,7 +19,7 @@
         <div class="row g-3">
             <div class="col-10">
                 <?php
-                include('./functions/funcionts.php');
+                include('functions/functions.php');
                 $posts_file = '../posts.txt';
                 if (file_exists($posts_file)) {
                     $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
