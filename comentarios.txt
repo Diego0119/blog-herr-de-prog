@@ -1,3 +1,1 @@
-1|id_usuario|comentario||fecha|id_post
-0|id_usuario|username|comentario|fecha|id_comentario
-1|1|Diego|este es un comentario|11/10|1
+1|67128c4486d0a|username|1323123|1

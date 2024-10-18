@@ -5,10 +5,11 @@ session_start();
 
 if (isset($_POST['submit_comentario'])) {
     $post_id = $_POST['post_id'];
+    $nickname = $_POST['nickname'];
+    $user_id = $_POST['user_id'];
     $comentario_texto = htmlspecialchars($_POST['comentario']);
-    $usuario = isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : 'Anonimo'; //puede ser anonimo el comentario :P
 
-    AgregarComentario($post_id, $usuario, $comentario_texto);
+    AgregarComentario($post_id, $nickname, $user_id, $comentario_texto);
 
     echo "<div class='alert alert-success mt-4'>Comentario agregado correctamente.</div>";
 
@@ -16,6 +17,7 @@ if (isset($_POST['submit_comentario'])) {
     exit;
 }
 ?>
+
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="../../index.php">Games blog</a>
@@ -48,7 +50,7 @@ if (isset($_POST['submit_comentario'])) {
                 $file_path = '../../../posts.txt';
                 if (file_exists($file_path)) {
                     $posts = file($file_path, FILE_IGNORE_NEW_LINES);
-                    if (isset($_GET['post_id'])) {
+                    if ($_GET['post_id'] > 0) {
                         $post_id = $_GET['post_id'];
                         $found = false;
                         foreach ($posts as $post) {
@@ -76,12 +78,12 @@ if (isset($_POST['submit_comentario'])) {
                                     <?php
                                     $comentarios_file = '../../../comentarios.txt';
                                     echo "<h1 class='fw-bolder fs-2 my-4'> Comentarios </h1>";
+                                    $hay_post = false;
                                     if (file_exists($comentarios_file)) {
                                         $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                                         foreach ($comentarios as $comentario) {
-                                            list($comentario_id_tema, $comentario_id_usuario, $comentario_username, $comentario_texto, $id_comentario) = explode("|", $comentario);
-                                            $hay_post = false;
-                                            if ($comentario_id_tema == $post_id) {
+                                            list($comentario_id, $comentario_id_usuario, $comentario_username, $comentario_texto, $post_id) = explode("|", $comentario);
+                                            if ($comentario_id == $post_id) {
                                                 echo "<div class='border border-5 p-2 rounded shadow-sm post-card bg-fondo'>";
                                                 echo "<p class='text-start fs-5 fw-bold'>" . $comentario_username . "</p>";
                                                 echo "<p class='text-start fs-6'>" . $comentario_texto . "</p>";
@@ -97,14 +99,15 @@ if (isset($_POST['submit_comentario'])) {
                                     ?>
                                     <div class='border my-2 p-2 rounded shadow-sm post-card'>
                                         <p class='text-start fs-5 fw-bold'>Agregar un comentario</p>
-                                        <form action="" method="post">
+                                        <form action="post.php" method="post">
                                             <div class="form-group">
                                                 <label for="comentario">Comentario</label>
-                                                <textarea class="form-control" id="comentario" name="comentario" rows="3"
-                                                    required></textarea>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
                                             </div>
-                                            <button type="submit" class="btn custom-btn mt-2">Agregar Comentario</button>
-                                            <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
+                                            <button type="submit" name="submit_comentario" id="submit_comentario" class="btn custom-btn mt-2">Agregar Comentario</button>
+                                            <input type="text" name="post_id" value="<?php echo ($post_id); ?>">
+                                            <input type="text" name="nickname" value="<?php echo ($_SESSION['nickname']); ?>">
+                                            <input type="text" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">                                     
                                         </form>
                                     </div>
 
