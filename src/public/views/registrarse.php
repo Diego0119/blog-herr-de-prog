@@ -23,17 +23,14 @@ if (isset($_POST['submit'])) {
             list($id, $stored_username, $stored_nickname, $stored_password) = explode("|", $usuario);
             if ($nickname === $stored_nickname) {
                 $error = "El usuario ya está registrado.";
+                die();
             }
+            $data = $username_id . "|" . $username . "|" . $nickname . "|" . "|" . $password;
+            $_SESSION['username'] = $username;
+            file_put_contents($usuarios_file, $data, FILE_APPEND);
+            header('Location: ../../index.php');
         }
     }
-
-    if (!isset($error)) {
-        file_put_contents($usuarios_file, "$username|$password\n", FILE_APPEND);
-        $_SESSION['username'] = $username;
-        header('Location: ../../index.php');
-        exit();
-    }
-
 }
 ?>
 
