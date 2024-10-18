@@ -25,11 +25,11 @@ if (isset($_POST['submit'])) {
                 $error = "El usuario ya está registrado.";
                 die();
             }
-            $data = $username_id . "|" . $username . "|" . $nickname . "|" . "|" . $password;
-            $_SESSION['username'] = $username;
-            file_put_contents($usuarios_file, $data, FILE_APPEND);
-            header('Location: ../../index.php');
         }
+        $data = $username_id . "|" . $username . "|" . $nickname . "|" . "|" . $password . PHP_EOL;
+        $_SESSION['username'] = $username;
+        file_put_contents($usuarios_file, $data, FILE_APPEND);
+        header('Location: ../../index.php');
     }
 }
 ?>
