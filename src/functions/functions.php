@@ -1,6 +1,10 @@
 <?php
 
-// lee el archivo
+/**
+ * Esta función se encarga de leer la base de datos de los posts, que en este caso es un txt
+ * @return array|bool retornara un array de los posts
+ */
+
 function LeerArchivo()
 {
     $database = '../posts.txt';
@@ -8,10 +12,19 @@ function LeerArchivo()
     return $posts;
 }
 
+/**
+ * Esta función esta encargada de subir un nuevo post
+ * @param mixed $titulo se le debe enviar el titulo del post
+ * @param mixed $autor se le debe enviar el id del autor
+ * @param mixed $descripcion se le debe enviar el contenido del post
+ * @param mixed $imagen se le debe enviar la imagen que tendra el post
+ * @return void esta función no retorna nada
+ */
 
-function SubirArchivo($titulo, $autor, $descripcion, $imagen_url)
+function SubirArchivo($titulo, $autor_id, $descripcion, $imagen)
 {
-
+    // Aca se mueve la imagen a la carpeta uploads
+    $imagen_url = MoverArchivo($imagen);
     $database = '../../../posts.txt';
 
     if (file_exists($database)) {
@@ -21,12 +34,18 @@ function SubirArchivo($titulo, $autor, $descripcion, $imagen_url)
         $count = 0;
     }
     $id = $count + 1;
-    $nuevo_post = $id . "|" . $titulo . "|" . $autor . "|" . $descripcion . "|" . $imagen_url;
-    // una vez armado el archivo 
+    // Se ordena segun el formato que tienen los posts en el txt
+    $nuevo_post = $id . "|" . $titulo . "|" . $autor_id . "|" . $descripcion . "|" . $imagen_url;
     if (file_put_contents($database, $nuevo_post . PHP_EOL, FILE_APPEND | LOCK_EX) == false) {
         echo "Error al escribir en el archivo.";
     }
 }
+
+/**
+ * Esta función esta encargada de eliminar un post
+ * @param mixed $id_post se le debe indicar el id del post a eliminar
+ * @return void 
+ */
 
 function EliminarPost($id_post)
 {
@@ -44,16 +63,41 @@ function EliminarPost($id_post)
 
 }
 
-// esta funcion debe mover el archivo dado a la carpeta upload
-function MoverArchivo()
+/**
+ * Esta función se encarga de mover el archivo subido a la carpeta uploads
+ * @param mixed $archivo se le debe enviar el archivo, en este caso sera la imagen subida
+ * @return bool|string retornara un booleano en el caso de que falle o una ruta mas el nombre del archivo en el caso de que sea exitoso
+ */
+
+function MoverArchivo($archivo)
 {
+    $upload_dir = __DIR__ . 'src/public/uploads/';
 
+    $temp_file_path = $archivo['tmp_name'];
 
+    $nombre_archivo = basename($archivo['name']);
+    $destino = $upload_dir . $nombre_archivo;
+
+    if (move_uploaded_file($temp_file_path, $destino)) {
+        return 'uploads/' . $nombre_archivo;
+    } else {
+        echo "Error al mover el archivo.";
+        return false;
+    }
 }
+
+
+/**
+ * Esta función se encarga de agregar un comentario a un post
+ * @param mixed $post_id se le debe enviar el post id
+ * @param mixed $nickname se le debe enviar el nickname del usuario
+ * @param mixed $user_id se le debe enviar el user id
+ * @param mixed $comentario_texto se le debe enviar el comentario del post
+ * @return void esta función no retorna nada
+ */
 
 function AgregarComentario($post_id, $nickname, $user_id, $comentario_texto)
 {
-    // id_comentario|id_usuario|comentario|id_post|fecha
     $comentario_file = '../../../comentarios.txt';
     $comentario_id = $post_id;
     //$fecha = Date(d - m - Y);
