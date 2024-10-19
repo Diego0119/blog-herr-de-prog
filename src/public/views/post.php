@@ -13,7 +13,7 @@ if (isset($_POST['submit_comentario'])) {
 
     echo "<div class='alert alert-success mt-4'>Comentario agregado correctamente.</div>";
 
-    header("Location: " . $_SERVER['REQUEST_URI']);
+    header("Location: post.php?post_id=" . $post_id);
     exit;
 }
 ?>
@@ -83,8 +83,8 @@ if (isset($_POST['submit_comentario'])) {
                                     if (file_exists($comentarios_file)) {
                                         $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                                         foreach ($comentarios as $comentario) {
-                                            list($comentario_id, $comentario_id_usuario, $comentario_username, $comentario_texto, $post_id) = explode("|", $comentario);
-                                            if ($comentario_id == $post_id) {
+                                            list($comentario_post_id, $comentario_id_usuario, $comentario_username, $comentario_texto, $post_id) = explode("|", $comentario);
+                                            if ($comentario_post_id == $post_id) {
                                                 echo "<div class='border border-5 p-2 rounded shadow-sm post-card bg-fondo'>";
                                                 echo "<p class='text-start fs-5 fw-bold'>" . $comentario_username . "</p>";
                                                 echo "<p class='text-start fs-6'>" . $comentario_texto . "</p>";
@@ -108,9 +108,9 @@ if (isset($_POST['submit_comentario'])) {
                                             </div>
                                             <button type="submit" name="submit_comentario" id="submit_comentario"
                                                 class="btn custom-btn mt-2">Agregar Comentario</button>
-                                            <input type="text" name="post_id" value="<?php echo ($post_id); ?>">
-                                            <input type="text" name="nickname" value="<?php echo ($_SESSION['nickname']); ?>">
-                                            <input type="text" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">
+                                            <input type="hidden" name="post_id" value="<?php echo ($post_id); ?>">
+                                            <input type="hidden" name="nickname" value="<?php echo ($_SESSION['nickname']); ?>">
+                                            <input type="hidden" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">
                                         </form>
                                     </div>
 
