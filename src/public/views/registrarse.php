@@ -9,8 +9,6 @@ if (isset($_POST['submit'])) {
     $nickname = $_POST['nickname'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    // echo $username . " " . $password . " " . $confirm_password;
-    // die();
 
     if ($password !== $confirm_password) {
         $error = "Las contraseñas no coinciden.";
@@ -55,6 +53,8 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <body>
     <div class="container mt-5">

@@ -1,3 +1,4 @@
+<!-- Este header ayuda a poder importarlo y ocupar los estilos de css en cada archivo que requiera HTML -->
 <!DOCTYPE html>
 <html lang="es">
 

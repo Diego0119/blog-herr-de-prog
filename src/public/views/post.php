@@ -37,6 +37,7 @@ if (isset($_POST['submit_comentario'])) {
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <body>
     <div class="container mt-4">
@@ -102,12 +103,14 @@ if (isset($_POST['submit_comentario'])) {
                                         <form action="post.php" method="post">
                                             <div class="form-group">
                                                 <label for="comentario">Comentario</label>
-                                                <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="3"
+                                                    required></textarea>
                                             </div>
-                                            <button type="submit" name="submit_comentario" id="submit_comentario" class="btn custom-btn mt-2">Agregar Comentario</button>
+                                            <button type="submit" name="submit_comentario" id="submit_comentario"
+                                                class="btn custom-btn mt-2">Agregar Comentario</button>
                                             <input type="text" name="post_id" value="<?php echo ($post_id); ?>">
                                             <input type="text" name="nickname" value="<?php echo ($_SESSION['nickname']); ?>">
-                                            <input type="text" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">                                     
+                                            <input type="text" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">
                                         </form>
                                     </div>
 

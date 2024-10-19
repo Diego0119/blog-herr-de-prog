@@ -20,6 +20,7 @@ session_start();
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <body>
 
@@ -61,16 +62,11 @@ session_start();
 
         } else if (isset($_POST['submit'])) {
 
-            // estos identificadores "titulo,autor....etc", provienen del html, de name="titulo" por ejemplo
             $titulo = $_POST['titulo'];
             $categoria = $_POST['categoria'];
             $descripcion = $_POST['descripcion'];
             $imagen_url = $_POST['imagen_url'];
 
-            // llamar a la funcion una vez recibidos todos los campos
-            // primero se debe buscar el archivo (txt)
-            // armar la variable para escribir en el archivo (lo hace la funcion)
-            // hay un campo FILE que tiene tmp_name, tmp_size, el nombre que se genera estara en el txt (la ruta)
             SubirArchivo($titulo, $autor, $descripcion, $imagen_url);
 
             echo "<div class='alert alert-success mt-4'>El post ha sido subido correctamente.</div>";

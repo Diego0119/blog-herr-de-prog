@@ -17,7 +17,7 @@
 
     <div class="container text-center mt-4">
         <div class="row g-3">
-            <div class="col-10">
+            <div class="col-12 col-lg-10">
                 <?php
                 include('functions/functions.php');
                 $posts_file = '../posts.txt';
@@ -29,7 +29,7 @@
                         $new_description = substr($description, 0, 320);
                         echo "<div class='border p-4 rounded mb-4 shadow-sm post-card'>";
                         echo "<a href='public/views/post.php?post_id=$id' class='text-decoration-none text-black'>";
-                        echo "<img src=$image class='rounded mb-3 img-fluid' width='850' alt='Post Image'>";
+                        echo "<img src=$image class='rounded mb-3 img-fluid' alt='Post Image'>";
                         echo "<p class='fs-4 fw-bold post-title'>$title</p>";
                         echo "<p class='text-justify post-content'>$new_description.....</p>";
                         echo "<p class=''>Autor: $autor</p>";
@@ -40,8 +40,8 @@
                 ?>
             </div>
 
-            <div class="col-2 sidebar-creadores">
-                <div class='border  p-4 rounded'>
+            <div class="col-12 col-lg-2 sidebar-creadores">
+                <div class='border p-4 rounded'>
                     <h5 class='fw-bold'>Post Recientes</h5>
                     <ul class='list-unstyled'>
                         <?php

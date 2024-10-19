@@ -4,9 +4,6 @@ session_start();
 if (isset($_POST['submit'])) {
     $entered_nickname = $_POST['nickname'];
     $entered_password = $_POST['password'];
-
-    // aca debo recorrer todo el txt viendo si existe el usuario
-    //1|Diego Sanhueza|username|123456
     $encontrado = false;
     $usuarios = file('../../../usuarios.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($usuarios as $usuario) {
@@ -47,6 +44,8 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 
 
 <body>

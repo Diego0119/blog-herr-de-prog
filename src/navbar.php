@@ -1,3 +1,4 @@
+<!-- Este navbar nos ayuda a reutiliza codigo importandolo donde lo necesitemos -->
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="./index.php">Games blog</a>
@@ -23,3 +24,4 @@
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
