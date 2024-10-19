@@ -21,8 +21,9 @@
                 <?php
                 include('functions/functions.php');
                 $posts_file = '../posts.txt';
+                LeerArchivo();
                 if (file_exists($posts_file)) {
-                    $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                    $posts = LeerArchivo();
                     foreach ($posts as $post) {
                         list($id, $title, $autor, $description, $image) = explode("|", $post);
                         $new_description = substr($description, 0, 320);
