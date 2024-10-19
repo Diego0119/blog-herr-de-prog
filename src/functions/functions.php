@@ -99,7 +99,7 @@ function MoverArchivo($archivo)
 function AgregarComentario($post_id, $nickname, $user_id, $comentario_texto)
 {
     $comentario_file = '../../../comentarios.txt';
-    $comentario_id = $post_id;
+    $comentario_id = uniqid();
     //$fecha = Date(d - m - Y);
     $comentario_data = "$comentario_id|$user_id|$nickname|$comentario_texto|$post_id" . PHP_EOL;
 

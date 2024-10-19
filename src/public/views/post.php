@@ -83,7 +83,7 @@ if (isset($_POST['submit_comentario'])) {
                                     if (file_exists($comentarios_file)) {
                                         $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                                         foreach ($comentarios as $comentario) {
-                                            list($comentario_post_id, $comentario_id_usuario, $comentario_username, $comentario_texto, $post_id) = explode("|", $comentario);
+                                            list($comentario_id, $comentario_id_usuario, $comentario_username, $comentario_texto, $comentario_post_id) = explode("|", $comentario);
                                             if ($comentario_post_id == $post_id) {
                                                 echo "<div class='border border-5 p-2 rounded shadow-sm post-card bg-fondo'>";
                                                 echo "<p class='text-start fs-5 fw-bold'>" . $comentario_username . "</p>";
