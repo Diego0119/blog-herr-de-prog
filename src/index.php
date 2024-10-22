@@ -31,7 +31,7 @@
                         echo "<a href='public/views/post.php?post_id=$id' class='text-decoration-none text-black'>";
                         echo "<img src=$image class='rounded mb-3 img-fluid' alt='Post Image'>";
                         echo "<p class='fs-4 fw-bold post-title'>$title</p>";
-                        echo "<p class=''>$categoria</p>";
+                        echo "<p>$categoria</p>";
                         echo "<p class='text-justify post-content'>$new_description.....</p>";
                         echo "<p class=''>Autor: $autor</p>";
                         echo "</a>";

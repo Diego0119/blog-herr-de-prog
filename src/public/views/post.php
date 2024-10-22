@@ -73,7 +73,7 @@ if (isset($_POST['submit_comentario'])) {
                                         class="img-fluid rounded mx-auto d-block" width="800">
                                 </div>
                                 <div class='border p-2 rounded shadow-sm post-card'>
-                                    <p class="text-justify fs-6"><?php echo nl2br(htmlspecialchars($content)); ?></p>
+                                    <p class="text-justify fs-6"><?php echo nl2br(htmlspecialchars($descripcion)); ?></p>
                                 </div>
                                 <div class='border p-2 rounded shadow-sm post-card'>
 
@@ -112,6 +112,13 @@ if (isset($_POST['submit_comentario'])) {
                                             <input type="hidden" name="post_id" value="<?php echo ($post_id); ?>">
                                             <input type="hidden" name="nickname" value="<?php echo ($_SESSION['nickname']); ?>">
                                             <input type="hidden" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">
+
+                                            <?php
+                                            if (!isset($_SESSION['user_id'])) {
+                                                echo "<div class='alert alert-danger mt-4'>Se debe iniciar sesión para comentar un post</div>";
+                                            }
+                                            ?>
+
                                         </form>
                                     </div>
 

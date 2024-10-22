@@ -10,10 +10,8 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if ($password !== $confirm_password) {
-        $error = "Las contraseñas no coinciden.";
-        header('Location: registrarse.php');
-    }
+    $coinciden = true;
+    $registrado = false;
 
     if (file_exists($usuarios_file)) {
         $usuarios = file($usuarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -21,13 +19,22 @@ if (isset($_POST['submit'])) {
             list($id, $stored_username, $stored_nickname, $stored_password) = explode("|", $usuario);
             if ($nickname === $stored_nickname) {
                 $error = "El usuario ya está registrado.";
-                die();
+                $registrado = true;
+                break;
             }
         }
-        $data = $username_id . "|" . $username . "|" . $nickname . "|" . "|" . $password . PHP_EOL;
-        $_SESSION['username'] = $username;
+        if ($password != $confirm_password) {
+            $coinciden = false;
+            $error = "Las contraseñas no coinciden.";
+        }
+    }
+
+    if (!$registrado && $coinciden) {
+        $data = $username_id . "|" . $username . "|" . $nickname . "|" . $password . PHP_EOL;
         file_put_contents($usuarios_file, $data, FILE_APPEND);
+        $_SESSION['username'] = $username;
         header('Location: ../../index.php');
+        exit();
     }
 }
 ?>
@@ -70,7 +77,7 @@ if (isset($_POST['submit'])) {
                         <label for="nickname">Nickname</label>
                         <input type="text" name="nickname" class="form-control" required>
                     </div>
-                    <div class="form-group mb-3">
+                    <div class="form-group mb-3 mt-2">
                         <label for="password">Contraseña</label>
                         <input type="password" name="password" class="form-control" required>
                     </div>
@@ -78,20 +85,16 @@ if (isset($_POST['submit'])) {
                         <label for="confirm_password">Confirmar Contraseña</label>
                         <input type="password" name="confirm_password" class="form-control" required>
                     </div>
+                    <button type="submit" name="submit" class="btn btn-primary btn-block">Registrarse</button>
                     <?php if (isset($error)) { ?>
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger mt-2" role="alert">
                             <?php echo $error; ?>
                         </div>
                     <?php } ?>
-                    <button type="submit" name="submit" class="btn btn-primary btn-block">Registrarse</button>
                 </form>
             </div>
         </div>
     </div>
 </body>
-<script>
-
- // puedo hacer confirmar la contraseña dinamicamente
-</script>
 
 </html>

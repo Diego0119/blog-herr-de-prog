@@ -6,8 +6,10 @@ if (isset($_POST['submit'])) {
     $entered_password = $_POST['password'];
     $encontrado = false;
     $usuarios = file('../../../usuarios.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
     foreach ($usuarios as $usuario) {
         list($id, $name, $nickname, $password) = explode("|", $usuario);
+
         if ($nickname == $entered_nickname && $password == $entered_password) {
             $encontrado = true;
             $_SESSION['nickname'] = $nickname;
@@ -15,11 +17,11 @@ if (isset($_POST['submit'])) {
             $_SESSION['user_id'] = uniqid();
             header('Location: ../../index.php');
             exit();
-        } else {
-            $error = "Credenciales incorrectas. Intenta de nuevo.";
         }
-        exit();
+    }
 
+    if (!$encontrado) {
+        $error = "Credenciales incorrectas. Intenta de nuevo.";
     }
 }
 ?>
@@ -46,19 +48,17 @@ if (isset($_POST['submit'])) {
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Iniciar Sesión</h2>
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <form method="POST">
+                <form method="POST" action="./iniciar_sesion.php">
                     <div>
                         <label for="nickname">Nickname</label>
                         <input type="text" name="nickname" class="form-control" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="password">Contraseña</label>
                         <input type="password" name="password" class="form-control" required>
                     </div>
