@@ -59,9 +59,10 @@ if (isset($_POST['submit_comentario'])) {
                             if ($post_data[0] == $post_id) {
                                 $found = true;
                                 $title = $post_data[1];
-                                $autor = $post_data[2];
-                                $content = $post_data[3];
-                                $image_url = $post_data[4];
+                                $categoria = $post_data[2];
+                                $autor = $post_data[3];
+                                $descripcion = $post_data[4];
+                                $image_url = $post_data[5];
                                 ?>
 
                                 <div class='border p-2 text-center rounded shadow-sm post-card'>
