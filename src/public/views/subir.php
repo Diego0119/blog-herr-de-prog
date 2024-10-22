@@ -28,15 +28,20 @@ session_start();
         <h1>Subir un Nuevo Post</h1>
 
         <form method="POST" action="subir.php" enctype="multipart/form-data">
-            <div class="form-group">
-
+            <div class="form-group mt-4">
                 <label for="titulo">Título del Post</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" required>
             </div>
 
-            <div class="form-group">
-                <label for="categoria">Categoria</label>
-                <input type="text" class="form-control" id="categoria" name="categoria" required>
+            <div class="form-group mt-4 mb-4">
+                <label for="categoria">Selecciona una categoria </label>
+                <select id="categoria" name="categoria" required>
+                    <option value="Noticia">Noticia</option>
+                    <option value="Lanzamiento">Lanzamiento</option>
+                    <option value="Dato curioso">Dato curioso</option>
+                    <option value="Tutorial">Tutorial</option>
+                </select>
+
             </div>
 
             <div class="form-group">
@@ -44,13 +49,13 @@ session_start();
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
             </div>
 
-            <div class="form-group mb-2">
+            <div class="form-group mb-2 mt-4">
                 <label for="imagen_url">URL de la Imagen</label>
                 <input type="file" class="form-control" id="imagen_url" name="imagen_url"
                     placeholder="https://placehold.co/600x400" required>
             </div>
 
-            <button type="submit" name="submit" id="submit" class="btn btn-primary">Subir Post</button>
+            <button type="submit" name="submit" id="submit" class="btn btn-primary mt-2">Subir Post</button>
         </form>
 
         <?php
@@ -67,7 +72,7 @@ session_start();
             $descripcion = $_POST['descripcion'];
             $imagen_url = $_POST['imagen_url'];
 
-            SubirArchivo($titulo, $autor, $descripcion, $imagen_url);
+            SubirArchivo($titulo, $autor, $categoria, $descripcion, $image_url);
 
             echo "<div class='alert alert-success mt-4'>El post ha sido subido correctamente.</div>";
         }

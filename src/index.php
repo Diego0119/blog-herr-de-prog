@@ -25,12 +25,13 @@
                 if (file_exists($posts_file)) {
                     $posts = LeerArchivo();
                     foreach ($posts as $post) {
-                        list($id, $title, $autor, $description, $image) = explode("|", $post);
+                        list($id, $title, $categoria, $autor, $description, $image) = explode("|", $post);
                         $new_description = substr($description, 0, 320);
                         echo "<div class='border p-4 rounded mb-4 shadow-sm post-card'>";
                         echo "<a href='public/views/post.php?post_id=$id' class='text-decoration-none text-black'>";
                         echo "<img src=$image class='rounded mb-3 img-fluid' alt='Post Image'>";
                         echo "<p class='fs-4 fw-bold post-title'>$title</p>";
+                        echo "<p class=''>$categoria</p>";
                         echo "<p class='text-justify post-content'>$new_description.....</p>";
                         echo "<p class=''>Autor: $autor</p>";
                         echo "</a>";

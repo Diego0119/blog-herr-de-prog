@@ -16,12 +16,13 @@ function LeerArchivo()
  * Esta función esta encargada de subir un nuevo post
  * @param mixed $titulo se le debe enviar el titulo del post
  * @param mixed $autor se le debe enviar el id del autor
+ * @param mixed $categoria se le debe enviar la categoria del post
  * @param mixed $descripcion se le debe enviar el contenido del post
  * @param mixed $imagen se le debe enviar la imagen que tendra el post
  * @return void esta función no retorna nada
  */
 
-function SubirArchivo($titulo, $autor_id, $descripcion, $imagen)
+function SubirArchivo($titulo, $autor_id, $categoria, $descripcion, $imagen)
 {
     // Aca se mueve la imagen a la carpeta uploads
     $imagen_url = MoverArchivo($imagen);
@@ -35,7 +36,7 @@ function SubirArchivo($titulo, $autor_id, $descripcion, $imagen)
     }
     $id = $count + 1;
     // Se ordena segun el formato que tienen los posts en el txt
-    $nuevo_post = $id . "|" . $titulo . "|" . $autor_id . "|" . $descripcion . "|" . $imagen_url;
+    $nuevo_post = $id . "|" . $titulo . "|" . $autor_id . "|" . $categoria . "|" . $descripcion . "|" . $imagen_url;
     if (file_put_contents($database, $nuevo_post . PHP_EOL, FILE_APPEND | LOCK_EX) == false) {
         echo "Error al escribir en el archivo.";
     }
