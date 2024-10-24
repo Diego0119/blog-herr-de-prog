@@ -73,6 +73,7 @@
                 </div>
                 <div class='border p-4 rounded shadow-sm mt-4'>
                     <h5 class='fw-bold'>Clima en la ciudad de Punta Arenas</h5>
+                    <p>7 ºC, ventoso y nublado.</p>
                     <p>Muy frio, no habiamos visto un frio tanto este año como este año tanto frio.</p>
                     <a href="https://www.meteored.cl/tiempo-en_Punta+Arenas-America+Sur-Chile-Magallanes+y+de+la+Antartica+Chilena-SCCI-1-18570.html"
                         target="blank">Clima</a>
