@@ -1,3 +1,4 @@
+/* Aca se tiene la paleta de colores usada en el blog*/
 :root {
     --color-primary: #12555a;
     --color-secondary: #eca351;
@@ -16,13 +17,18 @@
 }
 
 .custom-btn {
-    background-color: white; /*color de fondo*/
-    border: 2px solid var(--color-primary); /*borde*/
-    color: var(--color-primary); /*color text*/
+    background-color: white;
+    /*color de fondo*/
+    border: 2px solid var(--color-primary);
+    /*borde*/
+    color: var(--color-primary);
+    /*color text*/
 }
 
 .custom-btn:hover {
-    background-color: var(--color-primary); /* Color de fondo al pasar el mouse */
-    border-color: white; /* Cambia el color del borde en hover */
-    color: white; 
+    background-color: var(--color-primary);
+    /* Color de fondo al pasar el mouse */
+    border-color: white;
+    /* Cambia el color del borde en hover */
+    color: white;
 }

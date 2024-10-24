@@ -1,15 +1,16 @@
 <?php
 
-/**
- * Esta función se encarga de leer la base de datos de los posts, que en este caso es un txt
- * @return array|bool retornara un array de los posts
- */
 
-function LeerArchivo()
+/**
+ * Esta función lee la base de datos y la retorna
+ * @param mixed $database se le debe pasar la ubicación de la base de datos
+ * @return array|bool retornara un array
+ */
+function LeerArchivo($database)
 {
-    $database = '../posts.txt';
-    $posts = file($database, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    return $posts;
+    // $database = '../posts.txt';
+    $data = file($database, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    return $data;
 }
 
 /**

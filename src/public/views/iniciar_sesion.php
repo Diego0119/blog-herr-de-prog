@@ -1,17 +1,22 @@
 <?php
 session_start();
 
+// Se verifica si se ha presionado el boton de iniciar sesión
 if (isset($_POST['submit'])) {
+    // Se guarda en variables lo que se ha colocado en el formulario
     $entered_nickname = $_POST['nickname'];
     $entered_password = $_POST['password'];
-    $encontrado = false;
+    $error_detected = false;
+    // Se busca la base de datos de los usuarios
     $usuarios = file('../../../usuarios.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
+    // Se recorren los usuario
     foreach ($usuarios as $usuario) {
         list($id, $name, $nickname, $password) = explode("|", $usuario);
 
+        // Se realizan validaciones para evitar que se creen nicknames duplicados o que las credenciales sean incorrectas
         if ($nickname == $entered_nickname && $password == $entered_password) {
-            $encontrado = true;
+            $error_detected = true;
             $_SESSION['nickname'] = $nickname;
             $_SESSION['password'] = $password;
             $_SESSION['user_id'] = uniqid();
@@ -20,7 +25,8 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    if (!$encontrado) {
+    // Se crea un mensaje de error en el caso de que la contraseña o el nickname estan incorrectos
+    if (!$error_detected) {
         $error = "Credenciales incorrectas. Intenta de nuevo.";
     }
 }

@@ -21,9 +21,11 @@
                 <?php
                 include('functions/functions.php');
                 $posts_file = '../posts.txt';
-                LeerArchivo();
+                // Se verifica si existe la base de datos
                 if (file_exists($posts_file)) {
-                    $posts = LeerArchivo();
+                    // Se lee la base de datos con la función LeerArchivo()
+                    $posts = LeerArchivo($posts_file);
+                    // Se recorre posición de $posts
                     foreach ($posts as $post) {
                         list($id, $title, $categoria, $autor, $description, $image) = explode("|", $post);
                         $new_description = substr($description, 0, 320);
@@ -47,7 +49,9 @@
                     <ul class='list-unstyled'>
                         <?php
                         $posts_file = '../posts.txt';
-                        $posts = file($posts_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                        // Se lee la base de datos
+                        $posts = LeerArchivo($posts_file);
+                        // Se recorre cada posición de $posts
                         foreach ($posts as $post) {
                             list($id, $title) = explode("|", $post);
                             echo "<li><a href='public/views/post.php?post_id=$id' class='text-decoration-none text-dark'>$title</a></li>";

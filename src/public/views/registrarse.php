@@ -1,9 +1,11 @@
 <?php
 session_start();
 
+// Se verifica si se envio el formulario
 if (isset($_POST['submit'])) {
     $usuarios_file = '../../../usuarios.txt';
 
+    // Se guarda lo que se envia en variables
     $username = $_POST['username'];
     $username_id = uniqid();
     $nickname = $_POST['nickname'];
@@ -13,6 +15,7 @@ if (isset($_POST['submit'])) {
     $coinciden = true;
     $registrado = false;
 
+    // Se verifica que el archivo de usuarios exista
     if (file_exists($usuarios_file)) {
         $usuarios = file($usuarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($usuarios as $usuario) {
@@ -23,12 +26,14 @@ if (isset($_POST['submit'])) {
                 break;
             }
         }
+        // Si las contraseñas no coinciden, salta un error
         if ($password != $confirm_password) {
             $coinciden = false;
             $error = "Las contraseñas no coinciden.";
         }
     }
 
+    // Si esta todo bien se crea el usuario
     if (!$registrado && $coinciden) {
         $data = $username_id . "|" . $username . "|" . $nickname . "|" . $password . PHP_EOL;
         file_put_contents($usuarios_file, $data, FILE_APPEND);

@@ -3,12 +3,15 @@ include('../../functions/functions.php');
 
 session_start();
 
+// Se verifica si se envio el formulario
 if (isset($_POST['submit_comentario'])) {
+    // Se guarda en variables lo que se envio en el formulario
     $post_id = $_POST['post_id'];
     $nickname = $_POST['nickname'];
     $user_id = $_POST['user_id'];
     $comentario_texto = htmlspecialchars($_POST['comentario']);
 
+    // Se llama a la función AgregarComentario() para que se escriba en la base de datos
     AgregarComentario($post_id, $nickname, $user_id, $comentario_texto);
 
     echo "<div class='alert alert-success mt-4'>Comentario agregado correctamente.</div>";
@@ -49,11 +52,13 @@ if (isset($_POST['submit_comentario'])) {
             <div class="col-12">
                 <?php
                 $file_path = '../../../posts.txt';
+                // Se verifica que el archivo exista  
                 if (file_exists($file_path)) {
                     $posts = file($file_path, FILE_IGNORE_NEW_LINES);
                     if ($_GET['post_id'] > 0) {
                         $post_id = $_GET['post_id'];
                         $found = false;
+                        // Se recorre el post para renderizar su información en la vista en detalle
                         foreach ($posts as $post) {
                             $post_data = explode('|', $post);
                             if ($post_data[0] == $post_id) {
@@ -78,11 +83,14 @@ if (isset($_POST['submit_comentario'])) {
                                 <div class='border p-2 rounded shadow-sm post-card'>
 
                                     <?php
+                                    // Se busca la base de datos de comentarios
                                     $comentarios_file = '../../../comentarios.txt';
                                     echo "<h1 class='fw-bolder fs-2 my-4'> Comentarios </h1>";
                                     $hay_post = false;
+                                    // Se verifica que el archivo exista
                                     if (file_exists($comentarios_file)) {
                                         $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                        // Se recorren los comentarios del post para mostrarlos
                                         foreach ($comentarios as $comentario) {
                                             list($comentario_id, $comentario_id_usuario, $comentario_username, $comentario_texto, $comentario_post_id) = explode("|", $comentario);
                                             if ($comentario_post_id == $post_id) {
@@ -94,6 +102,8 @@ if (isset($_POST['submit_comentario'])) {
                                             }
                                         }
                                     }
+
+                                    // Se valida si no hay comentarios
                                     if (!$hay_post) {
                                         echo "<p>No hay comentarios disponibles.</p>";
                                     }
@@ -114,6 +124,7 @@ if (isset($_POST['submit_comentario'])) {
                                             <input type="hidden" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">
 
                                             <?php
+                                            // Se verifica que el usuario tenga una sesión iniciada para comentar
                                             if (!isset($_SESSION['user_id'])) {
                                                 echo "<div class='alert alert-danger mt-4'>Se debe iniciar sesión para comentar un post</div>";
                                             }
