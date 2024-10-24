@@ -37,7 +37,7 @@ function SubirArchivo($titulo, $autor_id, $categoria, $descripcion, $imagen)
     }
     $id = $count + 1;
     // Se ordena segun el formato que tienen los posts en el txt
-    $nuevo_post = $id . "|" . $titulo . "|" . $autor_id . "|" . $categoria . "|" . $descripcion . "|" . $imagen_url;
+    $nuevo_post = $id . "|" . $titulo . "|" . $categoria . "|" . $autor_id . "|" . $descripcion . "|" . $imagen_url;
     if (file_put_contents($database, $nuevo_post . PHP_EOL, FILE_APPEND | LOCK_EX) == false) {
         echo "Error al escribir en el archivo.";
     }
@@ -71,22 +71,23 @@ function EliminarPost($id_post)
  * @return bool|string retornara un booleano en el caso de que falle o una ruta mas el nombre del archivo en el caso de que sea exitoso
  */
 
+
 function MoverArchivo($archivo)
 {
-    $upload_dir = __DIR__ . 'src/public/uploads/';
+    $upload_dir = __DIR__ . '/../public/uploads/'; 
 
     $temp_file_path = $archivo['tmp_name'];
-
     $nombre_archivo = basename($archivo['name']);
     $destino = $upload_dir . $nombre_archivo;
 
     if (move_uploaded_file($temp_file_path, $destino)) {
-        return 'uploads/' . $nombre_archivo;
+        return $nombre_archivo;
     } else {
         echo "Error al mover el archivo.";
         return false;
     }
 }
+
 
 
 /**

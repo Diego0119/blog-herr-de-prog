@@ -72,7 +72,7 @@ if (isset($_POST['submit_comentario'])) {
                                 </div>
 
                                 <div class='border p-4 my-3 rounded shadow-sm post-card bg-white'>
-                                    <img src="<?php echo htmlspecialchars($image_url); ?>" alt="Imagen del post"
+                                    <img src="<?php echo '../uploads/' . htmlspecialchars($image_url); ?>" alt="Imagen del post"
                                         class="img-fluid rounded mx-auto d-block" width="800">
                                 </div>
 

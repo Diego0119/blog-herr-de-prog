@@ -32,7 +32,7 @@
                         $new_description = substr($description, 0, 320);
                         echo "<div class='card mb-4 shadow-sm'>";
                         echo "<a href='public/views/post.php?post_id=$id' class='text-decoration-none text-dark'>";
-                        echo "<img src='$image' class='card-img-top img-fluid rounded' alt='Post Image'>";
+                        echo "<img src='public/uploads/$image' class='card-img-top img-fluid rounded' alt='Post Image'>";
                         echo "<div class='card-body'>";
                         echo "<h5 class='card-title fw-bold'>$title</h5>";
                         echo "<p class='card-text'><small class='text-muted'> Categoria: $categoria | Autor: $autor</small></p>";

@@ -58,7 +58,7 @@ session_start();
         include('../../functions/functions.php');
 
         // Verifica que haya una sesión activa
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['nickname'])) {
             echo "<div class='alert alert-danger mt-4'>Se debe iniciar sesión para subir un post</div>";
         } else if (isset($_POST['submit'])) {
             // Se guarda lo que se envió en el formulario
@@ -68,7 +68,7 @@ session_start();
             $imagen_url = $_FILES['imagen_url']['name'];
 
             // Se llama a la función subir archivo
-            SubirArchivo($titulo, $_SESSION['user_id'], $categoria, $descripcion, $imagen_url); // Agregar $autor aquí
+            SubirArchivo($titulo, $_SESSION['nickname'], $categoria, $descripcion, $_FILES['imagen_url']);
         
             echo "<div class='alert alert-success mt-4'>El post ha sido subido correctamente.</div>";
         }
