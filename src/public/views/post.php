@@ -3,15 +3,13 @@ include('../../functions/functions.php');
 
 session_start();
 
-// Se verifica si se envio el formulario
+// Verificar si se envió el formulario
 if (isset($_POST['submit_comentario'])) {
-    // Se guarda en variables lo que se envio en el formulario
     $post_id = $_POST['post_id'];
     $nickname = $_POST['nickname'];
     $user_id = $_POST['user_id'];
     $comentario_texto = htmlspecialchars($_POST['comentario']);
 
-    // Se llama a la función AgregarComentario() para que se escriba en la base de datos
     AgregarComentario($post_id, $nickname, $user_id, $comentario_texto);
 
     echo "<div class='alert alert-success mt-4'>Comentario agregado correctamente.</div>";
@@ -23,7 +21,7 @@ if (isset($_POST['submit_comentario'])) {
 
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.php">Games blog</a>
+        <a class="navbar-brand" href="../../index.php">Games Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,23 +40,21 @@ if (isset($_POST['submit_comentario'])) {
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-<body>
+<body class="bg-light">
     <div class="container mt-4">
-
-        <a href="../../index.php" class="btn custom-btn" role="button">Volver</a>
-
+        <a href="../../index.php" class="btn btn-primary mb-3">Volver</a>
 
         <div class="row my-2">
             <div class="col-12">
                 <?php
                 $file_path = '../../../posts.txt';
-                // Se verifica que el archivo exista  
+                // Verificar si el archivo existe  
                 if (file_exists($file_path)) {
                     $posts = file($file_path, FILE_IGNORE_NEW_LINES);
                     if ($_GET['post_id'] > 0) {
                         $post_id = $_GET['post_id'];
                         $found = false;
-                        // Se recorre el post para renderizar su información en la vista en detalle
+                        // Recorrer los posts para renderizar la vista detallada
                         foreach ($posts as $post) {
                             $post_data = explode('|', $post);
                             if ($post_data[0] == $post_id) {
@@ -70,76 +66,74 @@ if (isset($_POST['submit_comentario'])) {
                                 $image_url = $post_data[5];
                                 ?>
 
-                                <div class='border p-2 text-center rounded shadow-sm post-card'>
-                                    <h1 class="fw-bolder fs-1 text-center my-2"><?php echo htmlspecialchars($title); ?></h1>
+                                <!-- Sección del post -->
+                                <div class='border p-4 text-center rounded shadow-sm post-card bg-white'>
+                                    <h1 class="fw-bolder fs-1 my-2"><?php echo htmlspecialchars($title); ?></h1>
                                 </div>
-                                <div class='border p-2 my-2 rounded shadow-sm post-card'>
+
+                                <div class='border p-4 my-3 rounded shadow-sm post-card bg-white'>
                                     <img src="<?php echo htmlspecialchars($image_url); ?>" alt="Imagen del post"
                                         class="img-fluid rounded mx-auto d-block" width="800">
                                 </div>
-                                <div class='border p-2 rounded shadow-sm post-card'>
+
+                                <div class='border p-4 rounded shadow-sm post-card bg-white'>
                                     <p class="text-justify fs-6"><?php echo nl2br(htmlspecialchars($descripcion)); ?></p>
                                 </div>
-                                <div class='border p-2 rounded shadow-sm post-card'>
+
+                                <div class='border p-4 rounded shadow-sm post-card bg-white'>
+                                    <h2 class='fw-bolder fs-4 my-4'>Comentarios</h2>
 
                                     <?php
-                                    // Se busca la base de datos de comentarios
                                     $comentarios_file = '../../../comentarios.txt';
-                                    echo "<h1 class='fw-bolder fs-2 my-4'> Comentarios </h1>";
                                     $hay_post = false;
-                                    // Se verifica que el archivo exista
+
                                     if (file_exists($comentarios_file)) {
                                         $comentarios = file($comentarios_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-                                        // Se recorren los comentarios del post para mostrarlos
                                         foreach ($comentarios as $comentario) {
                                             list($comentario_id, $comentario_id_usuario, $comentario_username, $comentario_texto, $comentario_post_id) = explode("|", $comentario);
                                             if ($comentario_post_id == $post_id) {
-                                                echo "<div class='border border-5 p-2 rounded shadow-sm post-card bg-fondo'>";
-                                                echo "<p class='text-start fs-5 fw-bold'>" . $comentario_username . "</p>";
-                                                echo "<p class='text-start fs-6'>" . $comentario_texto . "</p>";
+                                                echo "<div class='border p-3 my-2 rounded shadow-sm bg-light'>";
+                                                echo "<p class='fw-bold mb-1'>$comentario_username</p>";
+                                                echo "<p class='mb-0'>$comentario_texto</p>";
                                                 echo "</div>";
                                                 $hay_post = true;
                                             }
                                         }
                                     }
 
-                                    // Se valida si no hay comentarios
                                     if (!$hay_post) {
                                         echo "<p>No hay comentarios disponibles.</p>";
                                     }
-
                                     ?>
-                                    <div class='border my-2 p-2 rounded shadow-sm post-card'>
-                                        <p class='text-start fs-5 fw-bold'>Agregar un comentario</p>
+
+                                    <!-- Formulario para agregar un comentario -->
+                                    <div class='border mt-4 p-3 rounded shadow-sm bg-light'>
+                                        <h3 class='fs-5 mb-3'>Agregar un comentario</h3>
                                         <form action="post.php" method="post">
-                                            <div class="form-group">
+                                            <div class="form-group mb-3">
                                                 <label for="comentario">Comentario</label>
                                                 <textarea class="form-control" id="comentario" name="comentario" rows="3"
                                                     required></textarea>
                                             </div>
                                             <button type="submit" name="submit_comentario" id="submit_comentario"
-                                                class="btn custom-btn mt-2">Agregar Comentario</button>
+                                                class="btn btn-primary">Agregar Comentario</button>
                                             <input type="hidden" name="post_id" value="<?php echo ($post_id); ?>">
                                             <input type="hidden" name="nickname" value="<?php echo ($_SESSION['nickname']); ?>">
                                             <input type="hidden" name="user_id" value="<?php echo ($_SESSION['user_id']); ?>">
 
                                             <?php
-                                            // Se verifica que el usuario tenga una sesión iniciada para comentar
                                             if (!isset($_SESSION['user_id'])) {
-                                                echo "<div class='alert alert-danger mt-4'>Se debe iniciar sesión para comentar un post</div>";
+                                                echo "<div class='alert alert-danger mt-3'>Se debe iniciar sesión para comentar un post</div>";
                                             }
                                             ?>
-
                                         </form>
                                     </div>
-
                                 </div>
 
                                 <?php
                                 break;
                             }
                         }
-
 
                         if (!$found) {
                             echo "<p class='text-danger'>El post no existe.</p>";

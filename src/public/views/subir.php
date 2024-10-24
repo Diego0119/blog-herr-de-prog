@@ -1,6 +1,4 @@
 <?php include('../../header.php');
-//ini_set("display_startup_errors", "0");
-//ini_set("display_errors","0");
 session_start();
 ?>
 
@@ -25,63 +23,57 @@ session_start();
 <body>
 
     <div class="container mt-5">
-        <h1>Subir un Nuevo Post</h1>
+        <h1 class="text-center">Subir un Nuevo Post</h1>
 
-        <form method="POST" action="subir.php" enctype="multipart/form-data">
-            <div class="form-group mt-4">
+        <form method="POST" action="subir.php" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
                 <label for="titulo">Título del Post</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" required>
             </div>
 
-            <div class="form-group mt-4 mb-4">
-                <label for="categoria">Selecciona una categoria </label>
-                <select id="categoria" name="categoria" required>
+            <div class="form-group mt-4">
+                <label for="categoria">Selecciona una categoría</label>
+                <select id="categoria" name="categoria" class="form-select" required>
                     <option value="Noticia">Noticia</option>
                     <option value="Lanzamiento">Lanzamiento</option>
                     <option value="Dato curioso">Dato curioso</option>
                     <option value="Tutorial">Tutorial</option>
                 </select>
-
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <label for="descripcion">Descripción del Post</label>
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
             </div>
 
-            <div class="form-group mb-2 mt-4">
+            <div class="form-group mt-4">
                 <label for="imagen_url">URL de la Imagen</label>
-                <input type="file" class="form-control" id="imagen_url" name="imagen_url"
-                    placeholder="https://placehold.co/600x400" required>
+                <input type="file" class="form-control" id="imagen_url" name="imagen_url" required>
             </div>
 
-            <button type="submit" name="submit" id="submit" class="btn btn-primary mt-2">Subir Post</button>
+            <button type="submit" name="submit" id="submit" class="btn btn-primary mt-4">Subir Post</button>
         </form>
 
         <?php
-
         include('../../functions/functions.php');
 
-        // Verifica que este una sesión activa
+        // Verifica que haya una sesión activa
         if (!isset($_SESSION['user_id'])) {
             echo "<div class='alert alert-danger mt-4'>Se debe iniciar sesión para subir un post</div>";
-
         } else if (isset($_POST['submit'])) {
-
-            // Se guarda lo que se envio en el formulario
+            // Se guarda lo que se envió en el formulario
             $titulo = $_POST['titulo'];
             $categoria = $_POST['categoria'];
             $descripcion = $_POST['descripcion'];
-            $imagen_url = $_POST['imagen_url'];
+            $imagen_url = $_FILES['imagen_url']['name'];
 
             // Se llama a la función subir archivo
-            SubirArchivo($titulo, $autor, $categoria, $descripcion, $image_url);
-
+            SubirArchivo($titulo, $_SESSION['user_id'], $categoria, $descripcion, $imagen_url); // Agregar $autor aquí
+        
             echo "<div class='alert alert-success mt-4'>El post ha sido subido correctamente.</div>";
         }
         ?>
     </div>
 </body>
-<?php include('../../footer.php'); ?>
 
-</html>
+<?php include('../../footer.php'); ?>
