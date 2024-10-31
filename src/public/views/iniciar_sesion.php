@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 <?php include('../../header.php') ?>
 <nav class="navbar navbar-expand-lg bg-custom">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.php">Games blog</a>
+        <a class="navbar-brand" href="../../index.php" style="color: #ffffff;">Games Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,10 +43,10 @@ if (isset($_POST['submit'])) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../../index.php">Home</a>
+                    <a class="nav-link" aria-current="page" href="../../index.php" style="color: #ffffff;">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./subir.php">Upload Post</a>
+                    <a class="nav-link" href="./subir.php" style="color: #ffffff;">Upload Post</a>
                 </li>
             </ul>
         </div>
@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
                         </div>
                     <?php } ?>
                     <button type="submit" name="submit" class="btn btn-primary btn-block mt-2">Iniciar sesión</button>
-                    <p class="text-gray mt-2">¿No tienes cuenta? Registrate <a href="./registrarse.php">aca</a></p>
+                    <p class="text-gray mt-2">¿No tienes cuenta? Registrate <a href="./registrarse.php">acá</a></p>
                 </form>
             </div>
         </div>
